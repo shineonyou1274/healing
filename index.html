@@ -82,40 +82,40 @@
         }
     </style>
 </head>
-<body class="bg-calm min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-1000" id="mainBody">
+<body class="bg-calm min-h-screen flex items-center justify-center overflow-y-auto py-10 transition-colors duration-1000" id="mainBody">
 
-    <!-- 별 배경 효과 (CSS로 생성) -->
+    <!-- 별 배경 효과 -->
     <div class="fixed inset-0 pointer-events-none opacity-50" id="stars"></div>
 
-    <div class="relative w-full max-w-2xl px-4 py-8 z-10">
+    <div class="relative w-full max-w-2xl px-4 z-10 my-auto">
         
         <!-- 메인 카드 -->
-        <div class="glass-card rounded-3xl p-8 text-center relative overflow-hidden">
+        <div class="glass-card rounded-3xl p-6 md:p-8 text-center relative overflow-hidden">
             
             <!-- 상단 문구 -->
-            <header class="mb-10 fade-in">
-                <h1 class="text-3xl md:text-4xl font-bold mb-3 text-white tracking-widest">마음 쉼터</h1>
-                <p class="text-slate-300 text-sm md:text-base font-light">
+            <header class="mb-8 md:mb-10 fade-in">
+                <h1 class="text-2xl md:text-4xl font-bold mb-3 text-white tracking-widest">마음 쉼터</h1>
+                <p class="text-slate-300 text-xs md:text-base font-light">
                     선생님, 그리고 학생 여러분.<br>
                     치열했던 하루를 잠시 내려놓고 온전히 나를 마주하세요.
                 </p>
             </header>
 
             <!-- 호흡 가이드 섹션 -->
-            <div class="relative h-64 flex items-center justify-center mb-10">
-                <div class="absolute w-40 h-40 bg-indigo-400 rounded-full blur-2xl breathe-circle mix-blend-screen"></div>
-                <div class="absolute w-32 h-32 bg-purple-400 rounded-full blur-xl breathe-circle delay-100 mix-blend-screen" style="animation-delay: -2s;"></div>
+            <div class="relative h-48 md:h-64 flex items-center justify-center mb-8 md:mb-10">
+                <div class="absolute w-32 h-32 md:w-40 md:h-40 bg-indigo-400 rounded-full blur-2xl breathe-circle mix-blend-screen"></div>
+                <div class="absolute w-24 h-24 md:w-32 md:h-32 bg-purple-400 rounded-full blur-xl breathe-circle delay-100 mix-blend-screen" style="animation-delay: -2s;"></div>
                 
                 <div class="relative z-10 text-white text-center">
-                    <p id="breathText" class="text-xl font-medium tracking-widest opacity-90 transition-all duration-1000">
+                    <p id="breathText" class="text-lg md:text-xl font-medium tracking-widest opacity-90 transition-all duration-1000">
                         들이마세요...
                     </p>
                 </div>
             </div>
 
             <!-- 위로의 메시지 롤링 -->
-            <div class="h-20 flex items-center justify-center mb-8">
-                <p id="healingMessage" class="text-lg md:text-xl text-white font-light italic transition-opacity duration-1000 opacity-100 px-4 leading-relaxed">
+            <div class="h-16 md:h-20 flex items-center justify-center mb-6 md:mb-8">
+                <p id="healingMessage" class="text-base md:text-xl text-white font-light italic transition-opacity duration-1000 opacity-100 px-4 leading-relaxed">
                     "오늘 하루도 충분히 잘해냈습니다."
                 </p>
             </div>
@@ -123,29 +123,34 @@
             <!-- 명상 타이머 & 컨트롤 -->
             <div class="flex flex-col items-center gap-6">
                 <!-- 타이머 디스플레이 -->
-                <div id="timerDisplay" class="text-4xl font-mono text-white font-thin hidden">00:00</div>
+                <div id="timerDisplay" class="text-3xl md:text-4xl font-mono text-white font-thin hidden">00:00</div>
                 
-                <div class="flex gap-3">
-                    <button onclick="setTimer(1)" class="px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition text-sm">1분 명상</button>
-                    <button onclick="setTimer(3)" class="px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition text-sm">3분 명상</button>
-                    <button onclick="setTimer(5)" class="px-4 py-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition text-sm">5분 명상</button>
-                    <button onclick="stopTimer()" id="stopBtn" class="px-4 py-2 rounded-full bg-rose-500/20 text-rose-200 border border-rose-500/30 hover:bg-rose-500/30 transition text-sm hidden">멈춤</button>
+                <div class="flex flex-wrap justify-center gap-2 md:gap-3">
+                    <button onclick="setTimer(1)" class="px-3 py-2 md:px-4 md:py-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition text-xs md:text-sm">1분 명상</button>
+                    <button onclick="setTimer(3)" class="px-3 py-2 md:px-4 md:py-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition text-xs md:text-sm">3분 명상</button>
+                    <button onclick="setTimer(5)" class="px-3 py-2 md:px-4 md:py-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition text-xs md:text-sm">5분 명상</button>
+                    <button onclick="stopTimer()" id="stopBtn" class="px-3 py-2 md:px-4 md:py-2 rounded-full bg-rose-500/20 text-rose-200 border border-rose-500/30 hover:bg-rose-500/30 transition text-xs md:text-sm hidden">멈춤</button>
                 </div>
             </div>
 
             <!-- 오디오 플레이어 -->
-            <div class="mt-10 pt-6 border-t border-white/10">
-                <div class="flex items-center justify-between gap-4 bg-black/20 rounded-xl p-4">
-                    <button id="playPauseBtn" class="w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition">
-                        <i class="fas fa-play ml-1" id="playIcon"></i>
-                    </button>
+            <div class="mt-8 md:mt-10 pt-6 border-t border-white/10">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-black/20 rounded-xl p-4">
+                    <div class="flex items-center gap-4 w-full md:w-auto">
+                        <button id="playPauseBtn" class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 text-white transition">
+                            <i class="fas fa-play ml-1" id="playIcon"></i>
+                        </button>
+                        <div class="flex-1 md:hidden text-left">
+                            <p class="text-xs text-slate-400" id="musicTitleMobile">잔잔한 피아노 선율</p>
+                        </div>
+                    </div>
                     
-                    <div class="flex-1">
-                        <p class="text-xs text-slate-400 mb-1" id="musicTitle">잔잔한 피아노 선율</p>
+                    <div class="flex-1 w-full">
+                        <p class="hidden md:block text-xs text-slate-400 mb-1" id="musicTitle">잔잔한 피아노 선율</p>
                         <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.5" class="w-full h-1 bg-white/20 rounded-lg appearance-none cursor-pointer">
                     </div>
 
-                    <button onclick="openMusicModal()" class="text-xs text-slate-400 hover:text-white underline decoration-dotted underline-offset-4">
+                    <button onclick="openMusicModal()" class="w-full md:w-auto text-xs text-slate-400 hover:text-white underline decoration-dotted underline-offset-4 py-2 md:py-0">
                         음악 변경
                     </button>
                 </div>
@@ -153,14 +158,14 @@
 
         </div>
 
-        <footer class="text-center mt-6 text-slate-500 text-xs font-light">
+        <footer class="text-center mt-6 text-slate-500 text-xs font-light pb-4">
             © For Teachers & Students. Healing Space.
         </footer>
     </div>
 
     <!-- 음악 링크 입력 모달 -->
-    <div id="musicModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center backdrop-blur-sm">
-        <div class="bg-slate-800 p-6 rounded-2xl w-11/12 max-w-md border border-slate-700 shadow-2xl">
+    <div id="musicModal" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center backdrop-blur-sm p-4">
+        <div class="bg-slate-800 p-6 rounded-2xl w-full max-w-md border border-slate-700 shadow-2xl max-h-[90vh] overflow-y-auto">
             <h3 class="text-white text-lg font-bold mb-4">배경 음악 설정</h3>
             
             <!-- 추천 음악 리스트 -->
@@ -192,7 +197,7 @@
         </div>
     </div>
 
-    <!-- 오디오 엘리먼트 (기본: 교사의 숨 고르기 1) -->
+    <!-- 오디오 엘리먼트 -->
     <audio id="audioPlayer" loop>
         <source src="https://github.com/shineonyou1274/healing/raw/4201b2ed3bb024c4c9f6b4dc5acdbdb71569d7db/%EA%B5%90%EC%82%AC%EC%9D%98%20%EC%88%A8%20%EA%B3%A0%EB%A5%B4%EA%B8%B0.mp3" type="audio/mpeg">
         브라우저가 오디오 태그를 지원하지 않습니다.
@@ -201,19 +206,9 @@
     <script>
         // --- 1. 호흡 텍스트 가이드 ---
         const breathText = document.getElementById('breathText');
-        const phrases = [
-            { text: "깊게 들이마시세요...", time: 4000 },
-            { text: "잠시 멈추세요...", time: 2000 },
-            { text: "천천히 내쉬세요...", time: 6000 }
-        ];
-
-        let phraseIndex = 0;
-
+        
         function updateBreathGuide() {
-            // 사이클 반복을 위해 재귀적 호출이나 setInterval 대신
-            // CSS 애니메이션(8초)에 맞춰 텍스트 타이밍 조절
-            // 여기서는 단순화를 위해 4초(들숨)/4초(날숨) 주기로 텍스트 변경
-            
+            // 8초 주기로 텍스트 변경
             setInterval(() => {
                 breathText.style.opacity = 0;
                 setTimeout(() => {
@@ -229,7 +224,7 @@
                     breathText.innerText = "천천히 내쉬세요...";
                     breathText.style.opacity = 0.9;
                 }, 4500);
-            }, 8000); // 8초 주기
+            }, 8000);
         }
         
         // 초기 실행
@@ -269,27 +264,29 @@
         const musicModal = document.getElementById('musicModal');
         const musicUrlInput = document.getElementById('musicUrlInput');
         const musicTitle = document.getElementById('musicTitle');
+        const musicTitleMobile = document.getElementById('musicTitleMobile');
 
+        // 재생/일시정지 버튼
         playPauseBtn.addEventListener('click', () => {
             if (audio.paused) {
                 audio.play();
                 playIcon.className = 'fas fa-pause ml-0';
-                // 배경을 조금 더 몽환적으로
                 document.getElementById('mainBody').classList.remove('bg-calm');
                 document.getElementById('mainBody').classList.add('bg-animate');
             } else {
                 audio.pause();
                 playIcon.className = 'fas fa-play ml-1';
-                // 배경을 다시 차분하게
                 document.getElementById('mainBody').classList.add('bg-calm');
                 document.getElementById('mainBody').classList.remove('bg-animate');
             }
         });
 
+        // 볼륨 조절
         volumeControl.addEventListener('input', (e) => {
             audio.volume = e.target.value;
         });
 
+        // 모달 열기/닫기
         function openMusicModal() {
             musicModal.classList.remove('hidden');
         }
@@ -298,13 +295,14 @@
             musicModal.classList.add('hidden');
         }
 
-        // 프리셋 음악 선택 함수 추가
+        // 프리셋 음악 선택
         function selectPresetMusic(url, title) {
             audio.src = url;
             playMusic(title);
             closeMusicModal();
         }
 
+        // 사용자 입력 음악 변경
         function changeMusic() {
             const url = musicUrlInput.value.trim();
             if (url) {
@@ -314,14 +312,16 @@
             }
         }
 
-        // 음악 재생 및 상태 업데이트 공통 함수
+        // 음악 재생 공통 함수
         function playMusic(title) {
             audio.play().catch(e => console.log("재생 오류(사용자 상호작용 필요):", e));
             playIcon.className = 'fas fa-pause ml-0';
             musicTitle.innerText = title;
+            if(musicTitleMobile) musicTitleMobile.innerText = title;
             document.getElementById('mainBody').classList.remove('bg-calm');
             document.getElementById('mainBody').classList.add('bg-animate');
         }
+
 
         // --- 4. 타이머 기능 ---
         let timerInterval;
@@ -338,7 +338,7 @@
 
             // 오디오 자동 재생 (타이머 시작 시)
             if(audio.paused) {
-                audio.play();
+                audio.play().catch(e => console.log(e));
                 playIcon.className = 'fas fa-pause ml-0';
                 document.getElementById('mainBody').classList.remove('bg-calm');
                 document.getElementById('mainBody').classList.add('bg-animate');
@@ -371,7 +371,8 @@
             timerDisplay.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
 
-        // --- 5. 별 배경 효과 (Simple Starfield) ---
+
+        // --- 5. 별 배경 효과 ---
         function createStars() {
             const starContainer = document.getElementById('stars');
             const count = 50;
@@ -394,7 +395,7 @@
             }
         }
         
-        // CSS for twinkle injected dynamically or reuse breathing keyframe concept
+        // 별 반짝임 애니메이션 스타일 동적 추가
         const styleSheet = document.createElement("style");
         styleSheet.innerText = `
             @keyframes twinkle {
